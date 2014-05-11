@@ -39,3 +39,37 @@ raise "For an array with just more than one element, it should return the sum of
 #and an additional integer, n, as arguments 
 #and returns true if any two distinct elements in the array of integers sum to n. 
 #An empty array or single element array should both return false.
+
+def sum_to_n?(intArray, n)
+  if intArray.empty? || intArray.length == 1 
+  	return false
+  end
+
+  #there is prolly a better way to do this in Ruby, but for now a nested loop seems the way forward
+  intArray.each do |i|  	
+   	intArray.each do |j|
+   	  if i == j ;next;end	
+  	  sum = i + j
+      if sum == n
+      	 #puts "#{i} + #{j} = #{sum} = #{n}"
+         return true 
+      end
+  	end
+  end
+
+  return false
+end
+
+
+
+raise "An empty array should return false." unless sum_to_n?([],0) == false
+raise "A single element array should return false." unless sum_to_n?([23],0) == false
+raise "Return true when any two distinct elements in the array of integers sum to n. " unless sum_to_n?([1,2,3,4,5,6,7],12) == true
+raise "Return false when any two distinct elements in the array of integers fail to sum to n. [1]" unless sum_to_n?([-1,-2,3,4,5,-8], 12) == false
+raise "Return false when any two distinct elements in the array of integers fail to sum to n. [2]" unless sum_to_n?([1,2,3,5,6],12) == false
+
+
+
+
+
+
